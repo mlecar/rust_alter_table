@@ -1,0 +1,16 @@
+version: '2'
+services:
+    mysqldb-keyword-replacing:
+        image: mysql:5.6
+        environment:
+            MYSQL_DATABASE: keyword
+            MYSQL_USER: keyword
+            MYSQL_PASSWORD: keyword
+            MYSQL_ROOT_PASSWORD: master
+        ports:
+            - 3306:3306
+        volumes:
+            - ./mysql-data:/var/lib/mysql
+            - ./init/000-structure.sql:/docker-entrypoint-initdb.d/000-structure.sql
+volumes:
+    mysql-data:
