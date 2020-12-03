@@ -13,13 +13,15 @@ fn main() {
     let args: Vec<String> = env::args().collect();
 
     let table_name:&str;
+    let column_name:&str;
 
     match args.len() {
-        2 => {
+        3 => {
             table_name = args[1].trim().as_ref();
+            column_name = args[2].trim().as_ref();
         },
         _ => {
-            log::info!("Wrong number of arguments. Empty line?");
+            log::info!("Wrong number of arguments. Expected [table_name] [column_name]");
             return
         }
     }
@@ -40,7 +42,7 @@ fn main() {
     let pool = Pool::new(database_connection_string).unwrap();
     let mut conn = pool.get_conn().unwrap();
 
-    let alter_query:String = "ALTER TABLE :table_name MODIFY id BIGINT".replace(":table_name", table_name);
+    let alter_query:String = "ALTER TABLE :table_name MODIFY :column_name BIGINT".replace(":table_name", table_name).replace(":column_name", column_name);
 
     match conn.query_drop(alter_query) {
         Err(e) => {

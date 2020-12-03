@@ -4,3 +4,4 @@
 *.iml
 Cargo.lock
 *mysql-data/
+tables_to_update
