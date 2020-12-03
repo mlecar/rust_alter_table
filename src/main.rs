@@ -11,7 +11,6 @@ fn main() {
     dotenv().ok();
 
     let args: Vec<String> = env::args().collect();
-    log::info!("args {:?}", args);
 
     let table_name:&str;
 
@@ -48,7 +47,7 @@ fn main() {
             log::error!("An error occurred when updating column for {:?}: {:?}", table_name, e);
         },
         _ => {
-            log::info!("Table {:?} updated", table_name)
+            log::info!("Table {:?} - UPDATED", table_name)
         }
     }
 }
